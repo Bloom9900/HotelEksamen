@@ -25,7 +25,7 @@ public class Creditcard implements Serializable {
     private String type;
     private String cardNumber;
     private String expoDate;
-    private String nameOfHolder;
+    private String cardholder;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_name")
@@ -38,7 +38,7 @@ public class Creditcard implements Serializable {
         this.type = type;
         this.cardNumber = cardNumber;
         this.expoDate = expoDate;
-        this.nameOfHolder = nameOfHolder;
+        this.cardholder = nameOfHolder;
     }
 
     public Long getId() {
@@ -73,12 +73,12 @@ public class Creditcard implements Serializable {
         this.expoDate = expoDate;
     }
 
-    public String getNameOfHolder() {
-        return nameOfHolder;
+    public String getCardholder() {
+        return cardholder;
     }
 
-    public void setNameOfHolder(String nameOfHolder) {
-        this.nameOfHolder = nameOfHolder;
+    public void setCardholder(String cardholder) {
+        this.cardholder = cardholder;
     }
 
     public Customer getCustomer() {

@@ -1,36 +1,48 @@
 package dto;
 
+import entities.Booking;
+import entities.Hotel;
+import java.util.Set;
+
 public class HotelDTO {
-    private int id;
-    private String name;
+    private Long hotelId;
+    private String hotelName;
     private String content;
     private String email;
     private String directions;
-    private String phone;
+    private String hotelPhone;
     private String price;
     private String url;
     private String address;
+    private Set<Booking> bookings;
 
-    public HotelDTO(String name, String phone, String address) {
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
+    public HotelDTO(Hotel h) {
+        this.hotelId = h.getId();
+        this.hotelName = h.getName();
+        this.hotelPhone = h.getPhone();
+        this.address = h.getAddress();
+        if(bookings != null) {
+            this.bookings = h.getBookings();
+        }
     }
 
-    public int getId() {
-        return id;
+    public HotelDTO() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Long getHotelId() {
+        return hotelId;
     }
 
-    public String getName() {
-        return name;
+    public void setHotelId(Long hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
     }
 
     public String getContent() {
@@ -57,12 +69,12 @@ public class HotelDTO {
         this.directions = directions;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getHotelPhone() {
+        return hotelPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setHotelPhone(String hotelPhone) {
+        this.hotelPhone = hotelPhone;
     }
 
     public String getPrice() {
@@ -87,6 +99,14 @@ public class HotelDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
     }
     
     

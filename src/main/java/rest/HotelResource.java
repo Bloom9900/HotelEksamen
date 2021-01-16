@@ -6,7 +6,6 @@ import dto.BookingDTO;
 import dto.CreditcardDTO;
 import dto.CustomerDTO;
 import dto.HotelDTO;
-import dto.ReservationDTO;
 import facades.BookingFacade;
 import java.io.IOException;
 import utils.EMF_Creator;
@@ -62,13 +61,14 @@ public class HotelResource {
         CreditcardDTO creditDTO = gson.fromJson(booking, CreditcardDTO.class);
         HotelDTO hDTO = gson.fromJson(booking, HotelDTO.class);
         CustomerDTO cDTO = gson.fromJson(booking, CustomerDTO.class);
-        ReservationDTO rDTO = gson.fromJson(booking, ReservationDTO.class);
-        BookingDTO bDTO = new BookingDTO(cDTO, hDTO, creditDTO, rDTO);
+        BookingDTO bDTO = gson.fromJson(booking, BookingDTO.class);
         return gson.toJson(facade.makeBooking
         (
-                cDTO.getUsername(), cDTO.getPassword(), creditDTO.getCardnumber(), cDTO.getPhone(), creditDTO.getExpirationMonth(), creditDTO.getExpirationYear(),
-                creditDTO.getCardholder(), creditDTO.getType(), rDTO.getAmountOfNights(), rDTO.getPricePrNight(), rDTO.getStartDate(), hDTO.getId(), hDTO.getAddress(),
-                hDTO.getName(), hDTO.getPhone())
-        );
+                cDTO.getUsername(), cDTO.getPassword(), creditDTO.getCardnumber(),
+                cDTO.getPhone(), creditDTO.getExpirationMonth(), creditDTO.getExpirationYear(),
+                creditDTO.getCardholder(), creditDTO.getType(), bDTO.getAmountOfNights(), bDTO.getPricePrNight(),
+                bDTO.getStartDate(), hDTO.getHotelId(), hDTO.getAddress(), hDTO.getHotelName(),
+                hDTO.getHotelPhone()
+        ));
     }
 }

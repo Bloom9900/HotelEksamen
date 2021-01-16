@@ -1,10 +1,6 @@
 package facades;
 
 import dto.BookingDTO;
-import dto.CreditcardDTO;
-import dto.CustomerDTO;
-import dto.HotelDTO;
-import dto.ReservationDTO;
 import entities.Booking;
 import entities.Creditcard;
 import entities.Customer;
@@ -54,7 +50,7 @@ public class BookingFacade {
             int amountOfNights,
             int pricePrNight,
             String startDate,
-            int hotelId,
+            Long hotelId,
             String address,
             String hotelName,
             String hotelPhone
@@ -77,11 +73,7 @@ public class BookingFacade {
         } finally {
             em.close();
         }
-        CustomerDTO cDTO = new CustomerDTO(username, password, cardholder, phoneNumber);
-        HotelDTO hDTO = new HotelDTO(hotelName, hotelPhone, address);
-        CreditcardDTO creditDTO = new CreditcardDTO(cardnumber, expirationMonth, expirationYear, cardholder, cardtype);
-        ReservationDTO rDTO = new ReservationDTO(amountOfNights, pricePrNight, startDate);
-        return new BookingDTO(cDTO, hDTO, creditDTO, rDTO);
+        return new BookingDTO(booking);
     }
 
 }

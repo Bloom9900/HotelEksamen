@@ -54,6 +54,4 @@ public class CreditcardDTO {
     public void setType(String type) {
         this.type = type;
     }
-    
-    
 }

@@ -42,10 +42,10 @@ public class Customer implements Serializable {
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE})
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Creditcard> creditcards = new HashSet();
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE})
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Booking> bookings = new HashSet();
 
     public Customer() {

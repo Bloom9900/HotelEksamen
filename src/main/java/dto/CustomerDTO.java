@@ -1,17 +1,29 @@
 package dto;
 
+import entities.Booking;
+import entities.Creditcard;
+import entities.Customer;
+import java.util.Set;
+
 public class CustomerDTO {
     private String username;
     private String password;
     private String name;
     private String phone;
-    private CreditcardDTO cDTO;
+    private Set<Creditcard> creditcards;
+    private Set<Booking> bookings;
 
-    public CustomerDTO(String username, String password, String name, String phone) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.phone = phone;
+    public CustomerDTO(Customer c) {
+        this.username = c.getUsername();
+        this.password = c.getPassword();
+        this.name = c.getName();
+        this.phone = c.getPhone();
+        if(c.getCreditcards() != null) {
+            this.creditcards = c.getCreditcards();
+        }
+        if(c.getBookings() != null) {
+            this.bookings = c.getBookings();
+        }
     }
 
     public String getUsername() {
@@ -46,13 +58,21 @@ public class CustomerDTO {
         this.phone = phone;
     }
 
-    public CreditcardDTO getcDTO() {
-        return cDTO;
+    public Set<Creditcard> getCreditcards() {
+        return creditcards;
     }
 
-    public void setcDTO(CreditcardDTO cDTO) {
-        this.cDTO = cDTO;
+    public void setCreditcards(Set<Creditcard> creditcards) {
+        this.creditcards = creditcards;
     }
 
+    public Set<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(Set<Booking> bookings) {
+        this.bookings = bookings;
+    }
+    
     
 }
