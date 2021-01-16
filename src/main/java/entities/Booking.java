@@ -23,12 +23,12 @@ public class Booking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private LocalDateTime startDate;
+    private String startDate;
     private int amountOfNights;
     private int pricePrNight;
     
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "user_name")
     private Customer customer;
     
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -38,8 +38,8 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(int year, int month, int dayOfMont, int hour, int minute, int amountOfNights, int pricePrNight, Customer customer, Hotel hotel) {
-        this.startDate = LocalDateTime.of(year, month, dayOfMont, hour, minute);
+    public Booking(String startdate, int amountOfNights, int pricePrNight, Customer customer, Hotel hotel) {
+        this.startDate = startdate;
         this.amountOfNights = amountOfNights;
         this.pricePrNight = pricePrNight;
         this.customer = customer;
@@ -54,13 +54,21 @@ public class Booking implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
+
+//    public LocalDateTime getStartDate() {
+//        return startDate;
+//    }
+//
+//    public void setStartDate(LocalDateTime startDate) {
+//        this.startDate = startDate;
+//    }
 
     public int getAmountOfNights() {
         return amountOfNights;

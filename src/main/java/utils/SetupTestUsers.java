@@ -17,10 +17,10 @@ public class SetupTestUsers {
     // CHANGE the three passwords below, before you uncomment and execute the code below
     // Also, either delete this file, when users are created or rename and add to .gitignore
     // Whatever you do DO NOT COMMIT and PUSH with the real passwords
-
-    Customer user = new Customer("testNavn", "user", "test1", "23656270");
-    Customer admin = new Customer("adminNavn", "admin", "test1", "65748410");
-    Customer both = new Customer("mixbruger", "user_admin", "test1", "87451945");
+    
+    Customer user = new Customer("user", "test1", "testNavn", "23656270");
+    Customer admin = new Customer("admin", "test1", "adminNavn", "65748410");
+    Customer both = new Customer("user_admin", "test1", "mixbruger", "87451945");
 
     if(admin.getPassword().equals("test")||user.getPassword().equals("test")||both.getPassword().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");

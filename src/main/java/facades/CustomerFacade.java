@@ -3,7 +3,6 @@ package facades;
 import entities.Customer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
 import security.errorhandling.AuthenticationException;
 
 /**
@@ -43,16 +42,4 @@ public class CustomerFacade {
         }
         return customer;
     }
-    
-    public Customer getCustomer(String username) {
-        EntityManager em = emf.createEntityManager();
-        Customer customer;
-        try {
-            customer = em.find(Customer.class, username);
-        } finally {
-            em.close();
-        }
-        return customer;
-    }
-
 }

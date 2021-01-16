@@ -28,7 +28,7 @@ public class Creditcard implements Serializable {
     private String nameOfHolder;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "user_name")
     private Customer customer;
 
     public Creditcard() {
@@ -80,4 +80,14 @@ public class Creditcard implements Serializable {
     public void setNameOfHolder(String nameOfHolder) {
         this.nameOfHolder = nameOfHolder;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+    
+    
 }

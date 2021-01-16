@@ -5,52 +5,62 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Customer.deleteAllRows", query = "DELETE from Customer"),
-    @NamedQuery(name = "Customer.getAllRows", query = "SELECT c FROM Customer c")})
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customer_id;
-    @Column(name = "customer_name", length = 25)
-    @NotNull
-    private String name;
     @Id
+    @Basic(optional = false)
     @NotNull
+    @Column(name = "user_name", length = 25)
     private String username;
+    @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "password")
     private String password;
-    @NotNull
+
+    private String name;
     private String phone;
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Creditcard> creditCards = new HashSet();
-
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Booking> bookings = new HashSet();
-
     @JoinTable(name = "user_roles", joinColumns = {
-        @JoinColumn(name = "customer_name", referencedColumnName = "customer_name")}, inverseJoinColumns = {
+        @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE})
+    private Set<Creditcard> creditcards = new HashSet();
+
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE})
+    private Set<Booking> bookings = new HashSet();
+
+    public Customer() {
+    }
+
+    public Customer(String username, String password, String name, String phone) {
+        this.username = username;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public boolean verifyPassword(String password) {
+        return (BCrypt.checkpw(password, this.password));
+    }
 
     public List<String> getRolesAsStrings() {
         if (roleList.isEmpty()) {
@@ -61,36 +71,6 @@ public class Customer implements Serializable {
             rolesAsStrings.add(role.getRoleName());
         });
         return rolesAsStrings;
-    }
-
-    public Customer() {
-    }
-
-    public Customer(String name, String username, String password, String phone) {
-        this.name = name;
-        this.username = username;
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.phone = phone;
-    }
-
-    public boolean verifyPassword(String password) {
-        return (BCrypt.checkpw(password, this.password));
-    }
-
-    public Long getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(Long customer_id) {
-        this.customer_id = customer_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUsername() {
@@ -109,6 +89,14 @@ public class Customer implements Serializable {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -117,12 +105,24 @@ public class Customer implements Serializable {
         this.phone = phone;
     }
 
-    public Set<Creditcard> getCreditCards() {
-        return creditCards;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setCreditCards(Set<Creditcard> creditCards) {
-        this.creditCards = creditCards;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
+    public void addRole(Role userRole) {
+        roleList.add(userRole);
+    }
+
+    public Set<Creditcard> getCreditcards() {
+        return creditcards;
+    }
+
+    public void setCreditcards(Set<Creditcard> creditcards) {
+        this.creditcards = creditcards;
     }
 
     public Set<Booking> getBookings() {
@@ -133,7 +133,17 @@ public class Customer implements Serializable {
         this.bookings = bookings;
     }
 
-    public void addRole(Role userRole) {
-        roleList.add(userRole);
+    public void addCreditcard(Creditcard creditcard) {
+        if (creditcard != null) {
+            creditcard.setCustomer(this);
+            this.creditcards.add(creditcard);
+        }
+    }
+
+    public void addBooking(Booking booking) {
+        if (booking != null) {
+            booking.setCustomer(this);
+            this.bookings.add(booking);
+        }
     }
 }

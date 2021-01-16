@@ -9,4 +9,85 @@ public class HotelDTO {
     private String phone;
     private String price;
     private String url;
+    private String address;
+
+    public HotelDTO(String name, String phone, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDirections() {
+        return directions;
+    }
+
+    public void setDirections(String directions) {
+        this.directions = directions;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
 }
