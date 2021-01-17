@@ -56,7 +56,6 @@ public class BookingFacade {
             String hotelPhone
     ) {
         EntityManager em = getEntityManager();
-        Booking booking;
         try {
             em.getTransaction().begin();
             String expoDate = Integer.toString(expirationMonth) + Integer.toString(expirationYear);
@@ -71,20 +70,20 @@ public class BookingFacade {
                 customer = new Customer(username, password, cardholder, phoneNumber);
                 em.persist(customer);
             }
-            booking = new Booking(startDate, amountOfNights, pricePrNight);
+            Booking booking = new Booking(startDate, amountOfNights, pricePrNight);
             hotel.setId(id);
             booking.setHotel(hotel);
-            booking.setCustomer(customer);
             customer.addCreditcard(creditcard);
             creditcard.setCustomer(customer);
+            booking.setCustomer(customer);
             hotel.addBooking(booking);
             customer.addBooking(booking);
             em.persist(booking);
             em.getTransaction().commit();
+            return new BookingDTO(booking);
         } finally {
             em.close();
         }
-        return new BookingDTO(booking);
     }
 
 //    public List<Booking> getBookings(String username) {

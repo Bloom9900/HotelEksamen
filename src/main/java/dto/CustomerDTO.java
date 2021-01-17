@@ -10,8 +10,8 @@ public class CustomerDTO {
     private String password;
     private String fullname;
     private String phoneNumber;
-    private Set<Creditcard> creditcards;
-    private Set<Booking> bookings;
+    private Set<CreditcardDTO> creditcards;
+    private Set<BookingDTO> bookings;
 
     public CustomerDTO(Customer c) {
         this.username = c.getUsername();
@@ -19,10 +19,14 @@ public class CustomerDTO {
         this.fullname = c.getFullname();
         this.phoneNumber = c.getPhoneNumber();
         if(c.getCreditcards() != null) {
-            this.creditcards = c.getCreditcards();
+            for (Creditcard creditcard : c.getCreditcards()) {
+                creditcards.add(new CreditcardDTO(creditcard));
+            }
         }
         if(c.getBookings() != null) {
-            this.bookings = c.getBookings();
+            for (Creditcard creditcard : c.getCreditcards()) {
+                creditcards.add(new CreditcardDTO(creditcard));
+            }
         }
     }
 
@@ -58,21 +62,19 @@ public class CustomerDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Creditcard> getCreditcards() {
+    public Set<CreditcardDTO> getCreditcards() {
         return creditcards;
     }
 
-    public void setCreditcards(Set<Creditcard> creditcards) {
+    public void setCreditcards(Set<CreditcardDTO> creditcards) {
         this.creditcards = creditcards;
     }
 
-    public Set<Booking> getBookings() {
+    public Set<BookingDTO> getBookings() {
         return bookings;
     }
 
-    public void setBookings(Set<Booking> bookings) {
+    public void setBookings(Set<BookingDTO> bookings) {
         this.bookings = bookings;
     }
-    
-    
 }

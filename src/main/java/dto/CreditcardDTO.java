@@ -1,5 +1,7 @@
 package dto;
 
+import entities.Creditcard;
+
 public class CreditcardDTO {
     private String cardnumber;
     private int expirationMonth;
@@ -7,12 +9,15 @@ public class CreditcardDTO {
     private String cardholder;
     private String type;
 
-    public CreditcardDTO(String cardnumber, int expirationMonth, int expirationYear, String cardholder, String type) {
-        this.cardnumber = cardnumber;
-        this.expirationMonth = expirationMonth;
-        this.expirationYear = expirationYear;
-        this.cardholder = cardholder;
-        this.type = type;
+    public CreditcardDTO(Creditcard c) {
+        this.cardnumber = c.getCardNumber();
+        this.expirationMonth = c.getExpirationMonth();
+        this.expirationYear = c.getExpirationYear();
+        this.cardholder = c.getCardholder();
+        this.type = c.getType();
+    }
+
+    public CreditcardDTO() {
     }
 
     public String getCardnumber() {

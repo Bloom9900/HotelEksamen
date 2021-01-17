@@ -24,7 +24,8 @@ public class Creditcard implements Serializable {
     
     private String type;
     private String cardNumber;
-    private String expoDate;
+    private int expirationMonth;
+    private int expirationYear;
     private String cardholder;
 
     @ManyToOne
@@ -36,7 +37,8 @@ public class Creditcard implements Serializable {
     public Creditcard(String type, String cardNumber, String expoDate, String nameOfHolder) {
         this.type = type;
         this.cardNumber = cardNumber;
-        this.expoDate = expoDate;
+        this.expirationMonth = expirationMonth;
+        this.expirationYear = expirationYear;
         this.cardholder = nameOfHolder;
     }
 
@@ -64,12 +66,20 @@ public class Creditcard implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-    public String getExpoDate() {
-        return expoDate;
+    public int getExpirationMonth() {
+        return expirationMonth;
     }
 
-    public void setExpoDate(String expoDate) {
-        this.expoDate = expoDate;
+    public void setExpirationMonth(int expirationMonth) {
+        this.expirationMonth = expirationMonth;
+    }
+
+    public int getExpirationYear() {
+        return expirationYear;
+    }
+
+    public void setExpirationYear(int expirationYear) {
+        this.expirationYear = expirationYear;
     }
 
     public String getCardholder() {

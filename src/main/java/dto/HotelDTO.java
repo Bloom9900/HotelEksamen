@@ -14,15 +14,17 @@ public class HotelDTO {
     private String price;
     private String url;
     private String address;
-    private Set<Booking> bookings;
+    private Set<BookingDTO> bookings;
 
     public HotelDTO(Hotel h) {
         this.id = h.getId();
         this.name = h.getName();
         this.phone = h.getPhone();
         this.address = h.getAddress();
-        if(bookings != null) {
-            this.bookings = h.getBookings();
+        if(h.getBookings() != null) {
+            for (Booking booking : h.getBookings()) {
+                bookings.add(new BookingDTO(booking));
+            }
         }
     }
 
@@ -101,13 +103,11 @@ public class HotelDTO {
         this.address = address;
     }
 
-    public Set<Booking> getBookings() {
+    public Set<BookingDTO> getBookings() {
         return bookings;
     }
 
-    public void setBookings(Set<Booking> bookings) {
+    public void setBookings(Set<BookingDTO> bookings) {
         this.bookings = bookings;
-    }
-    
-    
+    }    
 }

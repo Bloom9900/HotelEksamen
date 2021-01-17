@@ -5,6 +5,7 @@ import entities.Creditcard;
 import java.util.Set;
 
 public class BookingDTO {
+
     private String startDate;
     private int amountOfNights;
     private String pricePrNight;
@@ -13,18 +14,19 @@ public class BookingDTO {
     private String hotelPhone;
     private String username;
     private String phone;
-    private Set<Creditcard> creditcards;
-    
+
+    public BookingDTO() {
+    }
+
     public BookingDTO(Booking b) {
         this.startDate = b.getStartDate();
         this.amountOfNights = b.getAmountOfNights();
         this.pricePrNight = b.getPricePrNight();
-        this.creditcards = b.getCustomer().getCreditcards();
-        if(b.getCustomer() != null) {
+        if (b.getCustomer() != null) {
             this.username = b.getCustomer().getUsername();
             this.phone = b.getCustomer().getPhoneNumber();
         }
-        if(b.getHotel() != null) {
+        if (b.getHotel() != null) {
             this.hotelName = b.getHotel().getName();
             this.hotelAddress = b.getHotel().getAddress();
             this.hotelPhone = b.getHotel().getPhone();
@@ -93,13 +95,5 @@ public class BookingDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Set<Creditcard> getCreditcards() {
-        return creditcards;
-    }
-
-    public void setCreditcards(Set<Creditcard> creditcards) {
-        this.creditcards = creditcards;
     }
 }
