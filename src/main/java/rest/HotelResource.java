@@ -65,10 +65,10 @@ public class HotelResource {
         return gson.toJson(facade.makeBooking
         (
                 cDTO.getUsername(), cDTO.getPassword(), creditDTO.getCardnumber(),
-                cDTO.getPhone(), creditDTO.getExpirationMonth(), creditDTO.getExpirationYear(),
+                cDTO.getPhoneNumber(), creditDTO.getExpirationMonth(), creditDTO.getExpirationYear(),
                 creditDTO.getCardholder(), creditDTO.getType(), bDTO.getAmountOfNights(), bDTO.getPricePrNight(),
-                bDTO.getStartDate(), hDTO.getHotelId(), hDTO.getAddress(), hDTO.getHotelName(),
-                hDTO.getHotelPhone()
+                bDTO.getStartDate(), hDTO.getId(), hDTO.getAddress(), hDTO.getName(),
+                hDTO.getPhone()
         ));
     }
     

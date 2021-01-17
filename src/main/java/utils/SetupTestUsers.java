@@ -21,10 +21,10 @@ public class SetupTestUsers {
     // Also, either delete this file, when users are created or rename and add to .gitignore
     // Whatever you do DO NOT COMMIT and PUSH with the real passwords
     
-//    Customer user = new Customer("user", "test1", "testNavn", "23656270");
-//    Customer admin = new Customer("admin", "test1", "adminNavn", "65748410");
-//    Customer both = new Customer("user_admin", "test1", "mixbruger", "87451945");
-//    
+    Customer user = new Customer("user", "test1", "testNavn", "23656270");
+    Customer admin = new Customer("admin", "test1", "adminNavn", "65748410");
+    Customer both = new Customer("user_admin", "test1", "mixbruger", "87451945");
+    
 //    Creditcard card = new Creditcard("visa", "561898156", "1221", "Jannich");
 //    Hotel hotel = new Hotel("Hotel Lotus", "Engvej 42", "2346235423");
 //    hotel.setId(2L);
@@ -46,26 +46,26 @@ public class SetupTestUsers {
 //    hotel.addBooking(booking2);
 //    user.addBooking(booking2);
 
-//    em.getTransaction().begin();
-//    Role userRole = new Role("user");
-//    Role adminRole = new Role("admin");
-//    user.addRole(userRole);
-//    admin.addRole(adminRole);
-//    both.addRole(userRole);
-//    both.addRole(adminRole);
-//    em.persist(userRole);
-//    em.persist(adminRole);
-//    em.persist(user);
-//    em.persist(admin);
-//    em.persist(both);
+    em.getTransaction().begin();
+    Role userRole = new Role("user");
+    Role adminRole = new Role("admin");
+    user.addRole(userRole);
+    admin.addRole(adminRole);
+    both.addRole(userRole);
+    both.addRole(adminRole);
+    em.persist(userRole);
+    em.persist(adminRole);
+    em.persist(user);
+    em.persist(admin);
+    em.persist(both);
 //    em.persist(booking);
 //        em.persist(hotel);
 //    em.persist(booking2);
-//    em.getTransaction().commit();
-//    System.out.println("PW: " + user.getPassword());
-//    System.out.println("Testing user with OK password: " + user.verifyPassword("test1"));
-//    System.out.println("Testing user with wrong password: " + user.verifyPassword("test"));
-//    System.out.println("Created TEST Users");
+    em.getTransaction().commit();
+    System.out.println("PW: " + user.getPassword());
+    System.out.println("Testing user with OK password: " + user.verifyPassword("test1"));
+    System.out.println("Testing user with wrong password: " + user.verifyPassword("test"));
+    System.out.println("Created TEST Users");
 
 
   }

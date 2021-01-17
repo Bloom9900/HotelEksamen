@@ -8,16 +8,16 @@ import java.util.Set;
 public class CustomerDTO {
     private String username;
     private String password;
-    private String name;
-    private String phone;
+    private String fullname;
+    private String phoneNumber;
     private Set<Creditcard> creditcards;
     private Set<Booking> bookings;
 
     public CustomerDTO(Customer c) {
         this.username = c.getUsername();
         this.password = c.getPassword();
-        this.name = c.getName();
-        this.phone = c.getPhone();
+        this.fullname = c.getFullname();
+        this.phoneNumber = c.getPhoneNumber();
         if(c.getCreditcards() != null) {
             this.creditcards = c.getCreditcards();
         }
@@ -42,20 +42,20 @@ public class CustomerDTO {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<Creditcard> getCreditcards() {

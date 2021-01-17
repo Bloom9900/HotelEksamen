@@ -5,10 +5,8 @@ import entities.Booking;
 import entities.Creditcard;
 import entities.Customer;
 import entities.Hotel;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
 
 /**
  *
@@ -50,27 +48,37 @@ public class BookingFacade {
             String cardholder,
             String cardtype,
             int amountOfNights,
-            int pricePrNight,
+            String pricePrNight,
             String startDate,
-            Long hotelId,
+            Long id,
             String address,
             String hotelName,
             String hotelPhone
     ) {
         EntityManager em = getEntityManager();
-        String expoDate = Integer.toString(expirationMonth) + Integer.toString(expirationYear);
-        Creditcard creditcard = new Creditcard(cardtype, cardnumber, expoDate, cardholder);
-        Hotel hotel = new Hotel(hotelName, address, hotelPhone);
-        Customer customer = new Customer(username, password, cardholder, phoneNumber);
-        Booking booking = new Booking(startDate, amountOfNights, pricePrNight);
-        customer.addCreditcard(creditcard);
-        creditcard.setCustomer(customer);
-        hotel.addBooking(booking);
-        customer.addBooking(booking);
-        booking.setHotel(hotel);
-        booking.setCustomer(customer);
+        Booking booking;
         try {
             em.getTransaction().begin();
+            String expoDate = Integer.toString(expirationMonth) + Integer.toString(expirationYear);
+            Creditcard creditcard = new Creditcard(cardtype, cardnumber, expoDate, cardholder);
+            Customer customer = em.find(Customer.class, username);
+            Hotel hotel = em.find(Hotel.class, id);
+            if (hotel == null) {
+                hotel = new Hotel(hotelName, address, hotelPhone);
+                em.persist(hotel);
+            }
+            if (customer == null) {
+                customer = new Customer(username, password, cardholder, phoneNumber);
+                em.persist(customer);
+            }
+            booking = new Booking(startDate, amountOfNights, pricePrNight);
+            hotel.setId(id);
+            booking.setHotel(hotel);
+            booking.setCustomer(customer);
+            customer.addCreditcard(creditcard);
+            creditcard.setCustomer(customer);
+            hotel.addBooking(booking);
+            customer.addBooking(booking);
             em.persist(booking);
             em.getTransaction().commit();
         } finally {
@@ -78,7 +86,7 @@ public class BookingFacade {
         }
         return new BookingDTO(booking);
     }
-    
+
 //    public List<Booking> getBookings(String username) {
 //        EntityManager em = getEntityManager();
 //        try {

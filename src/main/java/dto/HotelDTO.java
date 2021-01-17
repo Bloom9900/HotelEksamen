@@ -5,21 +5,21 @@ import entities.Hotel;
 import java.util.Set;
 
 public class HotelDTO {
-    private Long hotelId;
-    private String hotelName;
+    private Long id;
+    private String name;
     private String content;
     private String email;
     private String directions;
-    private String hotelPhone;
+    private String phone;
     private String price;
     private String url;
     private String address;
     private Set<Booking> bookings;
 
     public HotelDTO(Hotel h) {
-        this.hotelId = h.getId();
-        this.hotelName = h.getName();
-        this.hotelPhone = h.getPhone();
+        this.id = h.getId();
+        this.name = h.getName();
+        this.phone = h.getPhone();
         this.address = h.getAddress();
         if(bookings != null) {
             this.bookings = h.getBookings();
@@ -29,20 +29,20 @@ public class HotelDTO {
     public HotelDTO() {
     }
 
-    public Long getHotelId() {
-        return hotelId;
+    public Long getId() {
+        return id;
     }
 
-    public void setHotelId(Long hotelId) {
-        this.hotelId = hotelId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getHotelName() {
-        return hotelName;
+    public String getName() {
+        return name;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getContent() {
@@ -69,12 +69,12 @@ public class HotelDTO {
         this.directions = directions;
     }
 
-    public String getHotelPhone() {
-        return hotelPhone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setHotelPhone(String hotelPhone) {
-        this.hotelPhone = hotelPhone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPrice() {

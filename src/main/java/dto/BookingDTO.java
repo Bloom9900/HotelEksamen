@@ -7,7 +7,7 @@ import java.util.Set;
 public class BookingDTO {
     private String startDate;
     private int amountOfNights;
-    private int pricePrNight;
+    private String pricePrNight;
     private String hotelName;
     private String hotelAddress;
     private String hotelPhone;
@@ -22,7 +22,7 @@ public class BookingDTO {
         this.creditcards = b.getCustomer().getCreditcards();
         if(b.getCustomer() != null) {
             this.username = b.getCustomer().getUsername();
-            this.phone = b.getCustomer().getPhone();
+            this.phone = b.getCustomer().getPhoneNumber();
         }
         if(b.getHotel() != null) {
             this.hotelName = b.getHotel().getName();
@@ -47,11 +47,11 @@ public class BookingDTO {
         this.amountOfNights = amountOfNights;
     }
 
-    public int getPricePrNight() {
+    public String getPricePrNight() {
         return pricePrNight;
     }
 
-    public void setPricePrNight(int pricePrNight) {
+    public void setPricePrNight(String pricePrNight) {
         this.pricePrNight = pricePrNight;
     }
 

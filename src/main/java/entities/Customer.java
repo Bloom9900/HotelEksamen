@@ -33,8 +33,8 @@ public class Customer implements Serializable {
     @Column(name = "password")
     private String password;
 
-    private String name;
-    private String phone;
+    private String fullname;
+    private String phoneNumber;
 
     @JoinTable(name = "user_roles", joinColumns = {
         @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
@@ -54,8 +54,8 @@ public class Customer implements Serializable {
     public Customer(String username, String password, String name, String phone) {
         this.username = username;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.name = name;
-        this.phone = phone;
+        this.fullname = name;
+        this.phoneNumber = phone;
         this.creditcards = new HashSet();
         this.bookings = new HashSet();
     }
@@ -91,20 +91,20 @@ public class Customer implements Serializable {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
-    public String getName() {
-        return name;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public List<Role> getRoleList() {

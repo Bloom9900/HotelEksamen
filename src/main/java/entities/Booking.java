@@ -25,7 +25,7 @@ public class Booking implements Serializable {
     
     private String startDate;
     private int amountOfNights;
-    private int pricePrNight;
+    private String pricePrNight;
     
     @ManyToOne
     @JoinColumn(name = "user_name")
@@ -38,7 +38,7 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(String startdate, int amountOfNights, int pricePrNight) {
+    public Booking(String startdate, int amountOfNights, String pricePrNight) {
         this.startDate = startdate;
         this.amountOfNights = amountOfNights;
         this.pricePrNight = pricePrNight;
@@ -76,11 +76,11 @@ public class Booking implements Serializable {
         this.amountOfNights = amountOfNights;
     }
 
-    public int getPricePrNight() {
+    public String getPricePrNight() {
         return pricePrNight;
     }
 
-    public void setPricePrNight(int pricePrNight) {
+    public void setPricePrNight(String pricePrNight) {
         this.pricePrNight = pricePrNight;
     }
 
