@@ -5,8 +5,10 @@ import entities.Booking;
 import entities.Creditcard;
 import entities.Customer;
 import entities.Hotel;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -76,5 +78,16 @@ public class BookingFacade {
         }
         return new BookingDTO(booking);
     }
-
+    
+//    public List<Booking> getBookings(String username) {
+//        EntityManager em = getEntityManager();
+//        try {
+//            TypedQuery<Booking> query = em.createQuery("SELECT b FROM Bookings b WHERE b.user_name = :username", Booking.class);
+//            query.setParameter("username", username);
+//            List<Booking> bookings = query.getResultList();
+//            return bookings;
+//        } finally {
+//            em.close();
+//        }
+//    }
 }

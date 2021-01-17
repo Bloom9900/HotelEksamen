@@ -27,8 +27,7 @@ public class Creditcard implements Serializable {
     private String expoDate;
     private String cardholder;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "user_name")
+    @ManyToOne
     private Customer customer;
 
     public Creditcard() {

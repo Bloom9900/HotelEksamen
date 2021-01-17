@@ -27,11 +27,11 @@ public class Booking implements Serializable {
     private int amountOfNights;
     private int pricePrNight;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "user_name")
     private Customer customer;
     
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 

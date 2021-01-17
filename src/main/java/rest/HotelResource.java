@@ -71,4 +71,11 @@ public class HotelResource {
                 hDTO.getHotelPhone()
         ));
     }
+    
+//    @GET
+//    @Path("bookings/{username}")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public String getBookings(@PathParam("username") String username) {
+//        return gson.toJson(facade.getBookings(username));
+//    }
 }
