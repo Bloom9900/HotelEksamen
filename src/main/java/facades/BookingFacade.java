@@ -58,14 +58,15 @@ public class BookingFacade {
         EntityManager em = getEntityManager();
         String expoDate = Integer.toString(expirationMonth) + Integer.toString(expirationYear);
         Creditcard creditcard = new Creditcard(cardtype, cardnumber, expoDate, cardholder);
-        Customer customer = new Customer(username, password, cardholder, phoneNumber);
-        creditcard.setCustomer(customer);
-        customer.addCreditcard(creditcard);
         Hotel hotel = new Hotel(hotelName, address, hotelPhone);
-
-        Booking booking = new Booking(startDate, amountOfNights, pricePrNight, customer, hotel);
-        booking.setCustomer(customer);
+        Customer customer = new Customer(username, password, cardholder, phoneNumber);
+        Booking booking = new Booking(startDate, amountOfNights, pricePrNight);
+        customer.addCreditcard(creditcard);
+        creditcard.setCustomer(customer);
+        hotel.addBooking(booking);
         customer.addBooking(booking);
+        booking.setHotel(hotel);
+        booking.setCustomer(customer);
         try {
             em.getTransaction().begin();
             em.persist(booking);

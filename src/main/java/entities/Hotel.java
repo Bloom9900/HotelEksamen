@@ -26,8 +26,8 @@ public class Hotel implements Serializable {
     private String address;
     private String phone;
     
-    @OneToMany(mappedBy = "hotel", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Booking> bookings = new HashSet();
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.PERSIST)
+    private Set<Booking> bookings;
 
     public Hotel() {
     }
@@ -36,6 +36,7 @@ public class Hotel implements Serializable {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.bookings = new HashSet();
     }
     
     public Long getId() {
@@ -77,4 +78,13 @@ public class Hotel implements Serializable {
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
     }
+    
+    public void addBooking(Booking booking) {
+        if (booking != null) {
+            booking.setHotel(this);
+            this.bookings.add(booking);
+        }
+    }
+    
+    
 }

@@ -27,23 +27,21 @@ public class Booking implements Serializable {
     private int amountOfNights;
     private int pricePrNight;
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_name")
     private Customer customer;
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     public Booking() {
     }
 
-    public Booking(String startdate, int amountOfNights, int pricePrNight, Customer customer, Hotel hotel) {
+    public Booking(String startdate, int amountOfNights, int pricePrNight) {
         this.startDate = startdate;
         this.amountOfNights = amountOfNights;
         this.pricePrNight = pricePrNight;
-        this.customer = customer;
-        this.hotel = hotel;
     }
 
     public Long getId() {
@@ -101,4 +99,5 @@ public class Booking implements Serializable {
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
     }
+    
 }

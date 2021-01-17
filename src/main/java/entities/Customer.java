@@ -41,12 +41,12 @@ public class Customer implements Serializable {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
+    private Set<Creditcard> creditcards;
 
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Creditcard> creditcards = new HashSet();
-
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Booking> bookings = new HashSet();
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
+    private Set<Booking> bookings;
 
     public Customer() {
     }
@@ -56,6 +56,8 @@ public class Customer implements Serializable {
         this.password = BCrypt.hashpw(password, BCrypt.gensalt(12));
         this.name = name;
         this.phone = phone;
+        this.creditcards = new HashSet();
+        this.bookings = new HashSet();
     }
 
     public boolean verifyPassword(String password) {

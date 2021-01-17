@@ -1,6 +1,9 @@
 package utils;
 
+import entities.Booking;
+import entities.Creditcard;
 import entities.Customer;
+import entities.Hotel;
 import entities.Role;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +24,18 @@ public class SetupTestUsers {
     Customer user = new Customer("user", "test1", "testNavn", "23656270");
     Customer admin = new Customer("admin", "test1", "adminNavn", "65748410");
     Customer both = new Customer("user_admin", "test1", "mixbruger", "87451945");
+    
+//    Creditcard card = new Creditcard("visa", "561898156", "1221", "Jannich");
+//    Hotel hotel = new Hotel("Hotel Lotus", "Engvej 42", "2346235423");
+//    hotel.setId(2L);
+//    Booking booking = new Booking("I dag", 2, 50);
+//    user.addCreditcard(card);
+//    card.setCustomer(user);
+//    hotel.addBooking(booking);
+//    user.addBooking(booking);
+//    booking.setHotel(hotel);
+//    booking.setCustomer(user);
+    
 
     if(admin.getPassword().equals("test")||user.getPassword().equals("test")||both.getPassword().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
@@ -37,6 +52,7 @@ public class SetupTestUsers {
     em.persist(user);
     em.persist(admin);
     em.persist(both);
+//    em.persist(booking);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getPassword());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test1"));
